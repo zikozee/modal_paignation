@@ -1,9 +1,10 @@
 $(document).ready(function () {
+    // $('.eBtn, .nBtn, table').on('click', function (event) {// be mindful to use the comma
     $('.nBtn, table .eBtn').on('click', function (event) {
         event.preventDefault();// this prevents the get method findOne to be triggered automatically (remember we annotated with @ResponseBody>>> JSON)
 
         let targetHref = $(this).attr('href');
-        let text = $(this).text();
+        let text = $(this).text();//gets name value
         if(text ==='Edit'){
         $.get(targetHref, function(employee, status){
             $('.myForm #id').val(employee.id);
@@ -12,7 +13,7 @@ $(document).ready(function () {
             $('.myForm #email').val(employee.email);
         });
 
-        $('.myForm #exampleModal').modal();
+        $('.myForm #exampleModal').modal();// in an object(here its a div) with class myForm, there is an object with an id exampleModal
         }else{
             $('.myForm #id').val('');
             $('.myForm #firstName').val('');
@@ -23,7 +24,7 @@ $(document).ready(function () {
 
     });
 
-    $('.table .delBtn').on('click', function(event){
+    $('.table .delBtn').on('click', function(event){// in a table, there is a class with name delBtn
         event.preventDefault();
         let targetHref = $(this).attr('href');
         $('#staticBackdrop #delRef').attr('href', targetHref);
