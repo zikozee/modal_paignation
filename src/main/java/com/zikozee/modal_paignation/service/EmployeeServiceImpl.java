@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -33,6 +35,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Employee> findEmployeeByLastNameContainsAndEmailContains(String lastName, String emailContains) {
+        return repository.findEmployeeByLastNameContainsAndEmailContains(lastName, emailContains);
     }
 
 }

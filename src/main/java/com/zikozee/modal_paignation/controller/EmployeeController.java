@@ -2,6 +2,7 @@ package com.zikozee.modal_paignation.controller;
 
 import com.zikozee.modal_paignation.model.Employee;
 import com.zikozee.modal_paignation.service.EmployeeService;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@AllArgsConstructor
 public class EmployeeController {
 
     private final EmployeeService service;
 
-    public EmployeeController(EmployeeService service) {
-        this.service = service;
-    }
+//    public EmployeeController(EmployeeService service) {
+//        this.service = service;
+//    }
 
     @GetMapping("/")
     public String showPage(Model model, @RequestParam(defaultValue = "0") Long page ){

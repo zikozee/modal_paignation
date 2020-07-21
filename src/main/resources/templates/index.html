@@ -6,6 +6,7 @@
     <script type="text/javascript" src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
     <link rel="stylesheet" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css"/>
 </head>
 <body>
 
@@ -18,12 +19,12 @@
                     <nav class="navbar navbar-dark" style="background-color: #008b8b">
                         <a class="navbar-brand">EMPLOYEE DIRECTORY</a>
                         <button class="btn btn-success btn-lg nBtn">Create New Employee</button>
+                        <button class="btn btn-success btn-lg editBtn">Edit Employee</button>
                     </nav>
                 </tr>
                 <tr>
                     <th>ID</th>
                     <th>FIRST NAME</th>
-
                     <th>LAST NAME</th>
                     <th>EMAIL</th>
                     <th>Action</th>
@@ -31,7 +32,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="employee: ${data.content}">
-                    <td th:text="${employee.id}"></td>
+                    <td class="myId" th:text="${employee.id}"></td>
                     <td th:text="${employee.firstName}"></td>
                     <td th:text="${employee.lastName}"></td>
                     <td th:text="${employee.email}"></td>
@@ -125,6 +126,15 @@
 
 </div>
 
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    // $("tbody tr").click(function () {
+    //     $('.selected').removeClass('selected');
+    //     $(this).addClass("selected");
+    //     let currentID = $(this).attr('ID');
+    //     alert('i am selected with id' + currentID);
+    // });
+    /*]]>*/
+</script>
 </body>
 </html>
