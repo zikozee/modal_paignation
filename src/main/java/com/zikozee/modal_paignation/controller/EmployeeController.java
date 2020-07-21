@@ -17,10 +17,6 @@ public class EmployeeController {
 
     private final EmployeeService service;
 
-//    public EmployeeController(EmployeeService service) {
-//        this.service = service;
-//    }
-
     @GetMapping("/")
     public String showPage(Model model, @RequestParam(defaultValue = "0") Long page ){
         model.addAttribute("data", service.findAll(PageRequest.of(page.intValue(), 4)));

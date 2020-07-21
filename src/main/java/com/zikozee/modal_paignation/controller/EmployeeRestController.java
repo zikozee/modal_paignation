@@ -16,10 +16,6 @@ public class EmployeeRestController {
 
     private final EmployeeService service;
 
-//    public EmployeeRestController(EmployeeService service) {
-//        this.service = service;
-//    }
-
     @GetMapping("/employeeCustom")
     @ResponseBody//optional, since RestController already contains @ResponseBody
     public List<Employee> employeeCustom(@RequestParam(defaultValue = "") String lastName, @RequestParam(defaultValue = "") String email){
