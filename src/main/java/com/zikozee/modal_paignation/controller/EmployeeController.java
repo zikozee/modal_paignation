@@ -1,6 +1,7 @@
 package com.zikozee.modal_paignation.controller;
 
 import com.zikozee.modal_paignation.model.Employee;
+import com.zikozee.modal_paignation.model.EmployeeDTO;
 import com.zikozee.modal_paignation.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -25,8 +26,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String save(Employee employee){
-        service.save(employee);
+    public String save(EmployeeDTO employeeDTO){
+        service.save(employeeDTO);
 
         return "redirect:/";
     }

@@ -19,6 +19,26 @@ public class EmployeeRestController {
     @GetMapping("/employeeCustom")
     @ResponseBody//optional, since RestController already contains @ResponseBody
     public List<Employee> employeeCustom(@RequestParam(defaultValue = "") String lastName, @RequestParam(defaultValue = "") String email){
-        return service.findEmployeeByLastNameContainsAndEmailContains(lastName, email);
+        return service.findEmployeeByLastNameAndEmail(lastName, email);
     }
+
+
+    @GetMapping("/sorted")
+    public List<Employee> sorted(@RequestParam(defaultValue = "") String lastName, @RequestParam(defaultValue = "") String email){
+        return service.sorted(lastName, email);
+    }
+
+    @GetMapping("/email")
+    public List<Employee> findByEmailContaining(@RequestParam(defaultValue = "") String email){
+        return service.findByEmailContaining(email);
+    }
+
+
+    @GetMapping("/lastName")
+    @ResponseBody//optional, since RestController already contains @ResponseBody
+    public List<Employee> findAllbyLastname(@RequestParam(defaultValue = "") String lastName){
+        return service.findAllbyLastname(lastName);
+    }
+
+
 }

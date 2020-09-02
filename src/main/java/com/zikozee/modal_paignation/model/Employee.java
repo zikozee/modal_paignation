@@ -1,5 +1,7 @@
 package com.zikozee.modal_paignation.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,8 +9,10 @@ import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "employee")
 @Table(name =  "employee")
+@Builder
 public class Employee {
 
     @Id

@@ -2,14 +2,23 @@ package com.zikozee.modal_paignation.repository;
 
 import com.zikozee.modal_paignation.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long>,
+        JpaSpecificationExecutor<Employee>, StreamableJpaSpecificationRepository<Employee>  {
 
-//    @Query(value = "SELECT * FROM employee WHERE last_name like %?1% AND email like %?2%", nativeQuery = true)
-    @Query(value = "select * from employee  where last_name like %?1%  and email like %?2%", nativeQuery =true)
-    List<Employee> findEmployeeByLastNameContainsAndEmailContains(@Param("lastName") String lastName, @Param("email") String emailContains);
+//NATIVE QUERY
+    @Query(value = "select * from Employee  where last_name like %?1%  and email like %?2%", nativeQuery =true)
+    List<Employee> findEmployeeByLastNameAndEmail(String lastName,String emailContains);
+
+    Stream<Employee> findByEmailContaining(String email);
+
+    @Query(value = "select * from Employee  where last_name like %?1%", nativeQuery =true)
+    Stream<Employee> findAllbyLastname(String lastName);
+
+
 }
