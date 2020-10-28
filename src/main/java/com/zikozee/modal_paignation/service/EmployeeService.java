@@ -2,6 +2,7 @@ package com.zikozee.modal_paignation.service;
 
 import com.zikozee.modal_paignation.model.Employee;
 import com.zikozee.modal_paignation.model.EmployeeDTO;
+import com.zikozee.modal_paignation.model.SomeDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,5 +22,11 @@ public interface EmployeeService {
     List<Employee> findByEmailContaining(String email);
 
     List<Employee> findAllbyLastname(String lastName);
+
+    List<SomeDTO> findAllbyEmailContain(String email);
+
+    List<SomeDTO> findAllbyLastNameContain(String email);
+
+    List<String> getAllString();
 
 }

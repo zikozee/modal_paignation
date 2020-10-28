@@ -2,6 +2,7 @@ package com.zikozee.modal_paignation.service;
 
 import com.zikozee.modal_paignation.model.Employee;
 import com.zikozee.modal_paignation.model.EmployeeDTO;
+import com.zikozee.modal_paignation.model.SomeDTO;
 import com.zikozee.modal_paignation.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -70,6 +73,45 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findAllbyLastname(String lastName) {
         return repository.findAllbyLastname(lastName).collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public List<SomeDTO> findAllbyEmailContain(String email) {
+        return repository.findByEmailContaining(email)
+                .map(employee -> SomeDTO.builder()
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .build())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public List<SomeDTO> findAllbyLastNameContain(String lastName) {
+        Specification<Employee> specs = (entity, cq, cb) -> cb.like(cb.lower(entity.get("lastName")),"%" + lastName.toLowerCase() +"%");
+
+        return repository.stream(specs, Employee.class)
+                .map(employee -> SomeDTO.builder()
+                .lastName(employee.getLastName())
+                .firstName(employee.getFirstName())
+                .build())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<String> getAllString() {
+
+        Supplier<Stream<?>> supplier = () -> repository.findAllByLastNameContains("e");
+
+        return supplier.get()
+                .filter(data -> data instanceof Employee)
+                .map(data -> {
+                    Employee employee = (Employee)data;
+                    return employee.getFirstName() + " " + employee.getLastName() + " " + employee.getEmail();
+                })
+                .collect(Collectors.toList());
     }
 
     private Employee buildEmployee(EmployeeDTO employeeDTO){

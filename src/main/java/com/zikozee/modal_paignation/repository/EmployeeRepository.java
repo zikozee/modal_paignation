@@ -1,6 +1,7 @@
 package com.zikozee.modal_paignation.repository;
 
 import com.zikozee.modal_paignation.model.Employee;
+import com.zikozee.modal_paignation.model.SomeDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +21,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>,
     @Query(value = "select * from Employee  where last_name like %?1%", nativeQuery =true)
     Stream<Employee> findAllbyLastname(String lastName);
 
+    Stream<SomeDTO> findAllByEmailContains(String email);
 
+    Stream<?> findAllByLastNameContains(String name);
 }
